@@ -62,13 +62,6 @@ func (x *xlang) GenerateRules(args language.GenerateArgs) language.GenerateResul
 	rules := make([]*rule.Rule, 0)
 	imports := make([]interface{}, 0)
 
-	// Delete any existing go_proto_link rules in the package
-	for _, r := range args.File.Rules {
-		if r.Kind() == "go_proto_link" {
-			r.Delete()
-		}
-	}
-
 	for _, r := range args.OtherGen {
 		if r.Kind() == "go_proto_library" {
 			depName := r.Name()
@@ -76,6 +69,7 @@ func (x *xlang) GenerateRules(args language.GenerateArgs) language.GenerateResul
 			protoLinkRule.SetAttr("dep", ":"+depName)
 			protoLinkRule.SetAttr("version", "v1")
 			protoLinkRule.SetAttr("visibility", []string{"//visibility:public"})
+			protoLinkRule.AddComment(fmt.Sprintf(GEN_COMMENT_FMT, "Rule"))
 			rules = append(rules, protoLinkRule)
 			imports = append(imports, nil)
 			x.allProtoLinks = append(x.allProtoLinks, "//"+args.Rel+":"+protoLinkRule.Name())
