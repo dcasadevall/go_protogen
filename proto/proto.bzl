@@ -18,7 +18,7 @@ _go_proto_link = rule(
     },
 )
 
-def go_proto_link(name, **kwargs):
+def go_proto_link(name, visibility = None, **kwargs):
     if not "dir" in kwargs:
         dir = native.package_name()
         kwargs["dir"] = dir
@@ -26,8 +26,8 @@ def go_proto_link(name, **kwargs):
     gen_rule_name = "%s_copy_gen" % name
     _go_proto_link(name = gen_rule_name, **kwargs)
 
-    
     native.sh_binary(
         name = name,
-        srcs = [":%s" % gen_rule_name]
+        srcs = [":%s" % gen_rule_name],
+        visibility = visibility,
     )
