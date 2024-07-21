@@ -131,7 +131,7 @@ func (x *xlang) Resolve(c *config.Config, ix *resolve.RuleIndex, rc *repo.Remote
 
 			if len(x.allProtoLinks) > 0 {
 				// Create a new filegroup rule to include all proto links
-				filegroupRule := rule.NewRule("filegroup", "all_proto_links")
+				filegroupRule := rule.NewRule("filegroup", "go_proto_link")
 				filegroupRule.SetAttr("srcs", x.allProtoLinks)
 
 				rootBuildPath := filepath.Join(c.RepoRoot, "BUILD")
@@ -148,7 +148,7 @@ func (x *xlang) Resolve(c *config.Config, ix *resolve.RuleIndex, rc *repo.Remote
 
 				// Check if the filegroup rule already exists and delete it if found
 				for _, r := range rootFile.Rules {
-					if r.Kind() == "filegroup" && r.Name() == "all_proto_links" {
+					if r.Kind() == "filegroup" && r.Name() == "go_proto_link" {
 						r.Delete()
 						break
 					}
