@@ -7,7 +7,7 @@ The rule names have been changed from `go_proto_link` to `go_protogen` to be mor
 
 TODO: Add more information about the changes made and docs on how to use this fork.
 
-## Original README below
+## Original Description
 
 Bazel hack for linking go generated srcs. Find more details on this post I wrote [here](https://medium.com/goc0de/a-cute-bazel-proto-hack-for-golang-ides-2a4ef0415a7f?source=friends_link&sk=2ee762dff53812f8068b44f9e0f085f7).
 
@@ -32,7 +32,7 @@ bazel_dep(name = "rules_multirun", version = "0.1.0")
 
 You have to use [gazelle](https://github.com/bazelbuild/bazel-gazelle). If you don't know what that means, follow the link and instruction there in.
 
-## Integrate golink
+## Integrate go_protogen
 
 In your root `BUILD.bazel`
 
@@ -40,7 +40,7 @@ In your root `BUILD.bazel`
 load("@bazel_gazelle//:def.bzl", "DEFAULT_LANGUAGES", "gazelle_binary")
 gazelle_binary(
      name = "gazelle_binary",
-     languages = DEFAULT_LANGUAGES + ["@golink//gazelle/go_link:go_default_library"],
+     languages = DEFAULT_LANGUAGES + ["@go_protogen//gazelle/go_protogen:go_default_library"],
      visibility = ["//visibility:public"],
 )
 ```
@@ -86,9 +86,3 @@ You can then execute all the `go_protogen` rules by running:
 ```bash
 bazel run //:go_protogen
 ```
-
-## Example
-
-Here are two commits I did on my sample monorepo:
-* [Adding golink dependency](https://github.com/nikunjy/go/commit/515430cb666facb10df81a1df6597cd4cf24e69e)
-* [Result of running `bazel run //:gazelle`](https://github.com/nikunjy/go/commit/7423c84db9a584d7429a34600e5a621654ea3cad)
