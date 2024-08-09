@@ -65,7 +65,7 @@ func (x *xlang) GenerateRules(args language.GenerateArgs) language.GenerateResul
 	for _, r := range args.OtherGen {
 		if r.Kind() == "go_proto_library" {
 			depName := r.Name()
-			protogenRule := rule.NewRule("go_protogen", r.Name()+"_link")
+			protogenRule := rule.NewRule("go_protogen", r.Name()+"_gen")
 			protogenRule.SetAttr("dep", ":"+depName)
 			protogenRule.SetAttr("version", "v1")
 			protogenRule.SetAttr("visibility", []string{"//visibility:public"})
