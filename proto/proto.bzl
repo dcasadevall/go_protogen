@@ -1,11 +1,11 @@
 load("@bazel_skylib//lib:shell.bzl", "shell")
-load("//:golink.bzl", "gen_copy_files_script")
+load("//:go_protogen.bzl", "gen_copy_files_script")
 
-def go_proto_link_impl(ctx, **kwargs):
+def go_protogen_impl(ctx, **kwargs):
     return gen_copy_files_script(ctx, ctx.attr.dep[OutputGroupInfo].go_generated_srcs.to_list())
 
-_go_proto_link = rule(
-    implementation = go_proto_link_impl,
+_go_protogen = rule(
+    implementation = go_protogen_impl,
     attrs = {
         "dir": attr.string(),
         "dep": attr.label(),
@@ -18,13 +18,13 @@ _go_proto_link = rule(
     },
 )
 
-def go_proto_link(name, visibility = None, **kwargs):
+def go_protogen(name, visibility = None, **kwargs):
     if not "dir" in kwargs:
         dir = native.package_name()
         kwargs["dir"] = dir
 
     gen_rule_name = "%s_copy_gen" % name
-    _go_proto_link(name = gen_rule_name, **kwargs)
+    _go_protogen(name = gen_rule_name, **kwargs)
 
     native.sh_binary(
         name = name,

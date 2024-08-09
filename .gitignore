@@ -1,4 +1,4 @@
 bazel-*
 
 # IntellIJ project file
-golink.iml
+go_protogen.iml

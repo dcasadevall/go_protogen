@@ -24,12 +24,12 @@ def gen_copy_files_script(ctx, files):
         ),
     ]
 
-def golink_impl(ctx, **kwargs):
+def go_protogen_impl(ctx, **kwargs):
     return gen_copy_files_script(ctx, ctx.files.dep)
 
 
-_golink = rule(
-    implementation = golink_impl,
+_go_protogen = rule(
+    implementation = go_protogen_impl,
     attrs = {
         "dir": attr.string(),
         "dep": attr.label(),
@@ -42,14 +42,14 @@ _golink = rule(
     },
 )
 
-def golink(name, **kwargs):
+def go_protogen(name, **kwargs):
     if not "dir" in kwargs:
         dir = native.package_name()
         kwargs["dir"] = dir
 
     gen_rule_name = "%s_gen" % name
 
-    _golink(name = gen_rule_name, **kwargs)
+    _go_protogen(name = gen_rule_name, **kwargs)
 
     native.sh_binary(
         name = name,

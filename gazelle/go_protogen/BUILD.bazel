@@ -18,7 +18,7 @@ go_library(
 go_library(
     name = "go_link",
     srcs = ["proto_gen.go"],
-    importpath = "golink/gazelle/go_link",
+    importpath = "go_protogen/gazelle/go_link",
     visibility = ["//visibility:public"],
     deps = [
         "@gazelle//config:go_default_library",

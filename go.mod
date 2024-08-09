@@ -1,4 +1,4 @@
-module golink
+module github.com/dcasadevall/go_protogen
 
 go 1.21.4
 
