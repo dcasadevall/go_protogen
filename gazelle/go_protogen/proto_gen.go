@@ -140,7 +140,7 @@ func (x *xlang) Resolve(c *config.Config, ix *resolve.RuleIndex, rc *repo.Remote
 
 		// Check for existing multirun rule and delete if it exists
 		for _, r := range rootFile.Rules {
-			if r.Kind() == "multirun" && r.Name() == DirectiveMultirunRuleName {
+			if r.Kind() == "multirun" && r.Name() == x.multirunRuleName {
 				r.Delete()
 			}
 		}
