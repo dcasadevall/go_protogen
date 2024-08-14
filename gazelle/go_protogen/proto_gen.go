@@ -146,7 +146,7 @@ func (x *xlang) Resolve(c *config.Config, ix *resolve.RuleIndex, rc *repo.Remote
 		}
 
 		// Create a new multirun rule to include all proto links
-		multirunRule := rule.NewRule("multirun", DirectiveMultirunRuleName)
+		multirunRule := rule.NewRule("multirun", x.multirunRuleName)
 		multirunRule.SetAttr("commands", x.allProtogenRules)
 		multirunRule.SetAttr("jobs", 0)
 		multirunRule.AddComment(fmt.Sprintf(GenCommentFmt, "Rule"))
