@@ -3,7 +3,7 @@ load("@rules_go//go:def.bzl", "go_library")
 go_library(
     name = "go_protogen",
     srcs = ["proto_gen.go"],
-    importpath = "github.com/dcasadevall/go_protogen",
+    importpath = "github.com/dcasadevall/go_protogen/gazelle/go_protogen",
     visibility = ["//visibility:public"],
     deps = [
         "@gazelle//config:go_default_library",

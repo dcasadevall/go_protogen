@@ -86,3 +86,13 @@ You can then execute all the `go_protogen` rules by running:
 ```bash
 bazel run //:go_protogen
 ```
+
+## Configuration Directives
+
+`go_protogen` supports the following configuration directives. These
+directives can be set in multiple `BUILD` files, but the last value set
+will be the one used, so it is recommended that they are only
+set once, in the root `BUILD` file.
+
+- `protogen_multirun_rule_path` (default: `/`): The path to the `BUILD` file where the multirun rule will be generated.
+- `protogen_multirun_rule_name` (default: `go_protogen`): The name of the multirun rule in the designated `BUILD` file.
